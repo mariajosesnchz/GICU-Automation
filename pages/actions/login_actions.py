@@ -26,3 +26,4 @@ class LoginActions(BaseActions):
             segundo_elemento.click()
         else:
             raise Exception("No hay suficientes elementos en la página para hacer click en el segundo.")
+

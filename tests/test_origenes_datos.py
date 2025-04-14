@@ -14,7 +14,9 @@ def test_click_origenes_de_datos(driver):
     login.user_is_logged()
 
     menu = MenuSidebarActions(driver)
-    menu.click_origenes_datos()
+    menu.click_origenes_de_datos()
+
+    menu.go_to_recu()
 
 
 

@@ -12,3 +12,5 @@ class RecuPage(BaseActions):
     def click_explorar_by_title(self, title):
         self.click((By.XPATH,
                     f"//div[contains(text(), '{title}')]/ancestor::div[contains(@class, 'card')]//button[contains(text(),'EXPLORAR')]"))
+
+    generar = (By.CLASS_NAME,"v-btn__content")

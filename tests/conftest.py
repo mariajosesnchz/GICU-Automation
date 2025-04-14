@@ -18,9 +18,9 @@ def driver():
     options = Options()
     # options.add_argument("--headless")  # opcional: para correr sin abrir ventana
 
-    driver = webdriver.Firefox(options=options)  # No necesitas especificar el path
+    driver = webdriver.Firefox(options=options)
     driver.maximize_window()
     yield driver
-    driver.quit()
+    #driver.quit()
 
 

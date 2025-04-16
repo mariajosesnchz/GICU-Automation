@@ -1,0 +1,32 @@
+from pages.actions.login_actions import LoginActions
+from pages.actions.menu_sidebar_actions import MenuSidebarActions
+from pages.actions.recu_actions import RecuActions
+
+
+def test_generar_recu(driver):
+    login = LoginActions(driver)
+    #login.load("https://gicu-beta.uneatlantico.es/login")
+    login.load("https://gicu-app-release-quality.ctdesarrollo.org/login")
+    login.type_user("johndoe@example.com")
+    login.click_second_button_to_login()
+    login.user_is_logged()
+
+    menu = MenuSidebarActions(driver)
+    menu.click_origenes_de_datos()
+    menu.go_to_recu()
+
+    recu= RecuActions(driver)
+    recu.click_generar_button()
+    #recu.generar_nuevo_recu(
+        #titulo="QA Autotest Recu",
+        #notas="Este es un test automatizado",
+        #periodo="2023-2024",
+        #tipo="Parcial",
+        #estrategia="Estandar",
+        #modo="Automático"
+    #)
+
+
+    # Aquí podrías validar que el nuevo recu aparece en la lista
+    # (con un assert que busque el texto por ejemplo)
+

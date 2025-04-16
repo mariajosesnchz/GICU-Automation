@@ -5,8 +5,8 @@ from utils.dismiss_popup import dismiss_password_alert
 
 def test_click_origenes_de_datos(driver):
     login = LoginActions(driver)
-    #login.load("https://gicu-app-release-quality.ctdesarrollo.org/login")
-    login.load("https://gicu-beta.uneatlantico.es/login")
+    login.load("https://gicu-app-release-quality.ctdesarrollo.org/login")
+    #login.load("https://gicu-beta.uneatlantico.es/login")
     login.type_user("johndoe@example.com")
     #login.type_password("")
     login.click_second_button_to_login()

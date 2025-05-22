@@ -1,6 +1,8 @@
 from pages.actions.login_actions import LoginActions
 from pages.actions.menu_sidebar_actions import MenuSidebarActions
 from pages.actions.recu_actions import RecuActions
+from pages.pages_objects.recu_page import RecuPage
+
 
 
 def test_generar_recu(driver):
@@ -18,6 +20,17 @@ def test_generar_recu(driver):
     recu= RecuActions(driver)
     recu.click_generar_button()
     recu.type_titulo("RECU DETALLADO DE MASTERS 2023-2024")
+    recu.generar_nuevo_recu()
+
+    #RecuPage.select_periodo()
+
+
+
+
+
+
+
+
 
 
 

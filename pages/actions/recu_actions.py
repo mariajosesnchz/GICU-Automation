@@ -10,7 +10,7 @@ from selenium.webdriver.support import expected_conditions as EC
 
 class RecuActions(BaseActions):
 
-    def generar_nuevo_recu(self, titulo, notas, periodo, tipo, estrategia, modo):
+    def  generar_nuevo_recu(self, titulo, notas, periodo, tipo, estrategia, modo):
         self.element_click(RecuPage.btn_generar)
         self.type_info(RecuPage.campo_titulo, titulo)
         self.send_keys(RecuPage.campo_notas, notas)
@@ -60,6 +60,8 @@ class RecuActions(BaseActions):
 
         self.clear_field(RecuPage.campo_titulo)
         self.type_info(RecuPage.campo_titulo, titulo)
+
+
 
 
 

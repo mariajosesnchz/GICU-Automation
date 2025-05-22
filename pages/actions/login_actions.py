@@ -5,10 +5,10 @@ class LoginActions(BaseActions):
         super().__init__(driver)
 
     def type_user(self, user: str):
-        self.clear_field(Login.userInput) # Limpia el campo antes de escribir
+        self.clear_field(Login.userInput)
         self.type_info(Login.userInput, user)
     def type_password (self, password: str):
-        self.clear_field(Login.passwordInput)  # Limpia el campo antes de escribir
+        self.clear_field(Login.passwordInput)
         self.type_info(Login.passwordInput, password)
     #def click_to_login(self):
         #self.element_click(Login.loginButton)

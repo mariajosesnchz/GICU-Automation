@@ -7,16 +7,20 @@ def test_generar_recu(driver):
     login = LoginActions(driver)
     #login.load("https://gicu-beta.uneatlantico.es/login")
     login.load("https://gicu-app-release-quality.ctdesarrollo.org/login")
-    login.type_user("johndoe@example.com")
+    login.type_user("maria.sanchez@funiber.org")
+    login.type_password("aHGYpUoRxg")
     login.click_second_button_to_login()
     login.user_is_logged()
-
     menu = MenuSidebarActions(driver)
     menu.click_origenes_de_datos()
     menu.go_to_recu()
 
     recu= RecuActions(driver)
     recu.click_generar_button()
+    recu.type_titulo("RECU DETALLADO DE MASTERS 2023-2024")
+
+
+
     #recu.generar_nuevo_recu(
         #titulo="QA Autotest Recu",
         #notas="Este es un test automatizado",

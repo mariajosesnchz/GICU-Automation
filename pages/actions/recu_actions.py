@@ -1,5 +1,3 @@
-from datetime import time
-
 from selenium.common import TimeoutException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
@@ -10,15 +8,41 @@ from selenium.webdriver.support import expected_conditions as EC
 
 class RecuActions(BaseActions):
 
-    def  generar_nuevo_recu(self, titulo, notas, periodo, tipo, estrategia, modo):
-        self.element_click(RecuPage.btn_generar)
-        self.type_info(RecuPage.campo_titulo, titulo)
-        self.send_keys(RecuPage.campo_notas, notas)
-        self.select_dropdown_by_text(RecuPage.select_periodo, periodo)
-        self.select_dropdown_by_text(RecuPage.select_tipo, tipo)
-        self.select_dropdown_by_text(RecuPage.select_estrategia, estrategia)
-        self.select_dropdown_by_text(RecuPage.select_modo, modo)
-        self.element_click(RecuPage.boton_confirmar_generar)
+    def  generar_nuevo_recu(self, periodo, tipo, estrategia, modo,ruta):
+        #self.send_keys(RecuPage.campo_notas, notas)
+
+        # Seleccionamos cada dropdown por índice
+        self.select_dropdown_by_index(0, periodo)
+        self.select_dropdown_by_index(1, tipo)
+        self.select_dropdown_by_index(2, estrategia)
+        self.select_dropdown_by_index(3, modo)
+        self.subir_archivo(ruta)
+        self.element_click(RecuPage.btn_confirmar_generar)
+
+        # Aquí deberías ubicar el botón confirmar si existe
+        #try:
+        #    self.element_click(RecuPage.btn_confirmar_generar)
+        #except Exception as e:
+        #    print(f"[DEBUG] No se pudo hacer clic en confirmar: {e}")
+
+    def select_dropdown_by_index(self, index, value_to_select):
+        wait = WebDriverWait(self.driver, 10)
+        dropdowns = wait.until(EC.presence_of_all_elements_located(RecuPage.select_dropdown))
+
+        print(f"Cantidad de dropdowns encontrados: {len(dropdowns)}")
+        dropdown = dropdowns[index]
+
+        dropdown.click()  # Abre el menú
+
+        # Espera el menú desplegable y hace clic en el valor deseado
+        option = wait.until(EC.visibility_of_element_located(RecuPage.opcion_dropdown_con_texto(value_to_select)))
+        option.click()
+
+
+    def subir_archivo(self, ruta_archivo):
+        wait = WebDriverWait(self.driver, 10)
+        input_file = wait.until(EC.presence_of_element_located(RecuPage.input_archivo))
+        input_file.send_keys(ruta_archivo)
 
     def click_generar_button(self):
         wait = WebDriverWait(self.driver, 10)
@@ -49,6 +73,7 @@ class RecuActions(BaseActions):
 
     def type_titulo(self, titulo: str):
         wait = WebDriverWait(self.driver, 5)
+
 
         try:
             wait.until(EC.invisibility_of_element_located((By.CLASS_NAME, "v-overlay__scrim")))

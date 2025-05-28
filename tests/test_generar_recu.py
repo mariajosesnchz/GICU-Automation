@@ -20,8 +20,10 @@ def test_generar_recu(driver):
     recu= RecuActions(driver)
     recu.click_generar_button()
     recu.type_titulo("RECU DETALLADO DE MASTERS 2023-2024")
-    recu.generar_nuevo_recu("2023-2024", "RECU Detallado de Masters", "SpreadSheet Loader", "Manual",
+    recu.generar_nuevo_recu("2024-2025", "RECU Detallado de Masters", "SpreadSheet Loader", "Manual",
                             r"C:\Users\Maria Sanchez\Downloads\RECUS\RECU Detallado Master 23-24.xlsx")
+    recu.click_confirmar_generar_button()
+
 
     #RecuPage.select_periodo()
 

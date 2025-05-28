@@ -8,7 +8,7 @@ class RecuPage(BaseActions):
     campo_notas=(By.ID, "input-649")
     select_dropdown=(By.CSS_SELECTOR,"div.v-input.v-select")
     input_archivo = (By.NAME, "file_input")
-    btn_confirmar_generar=(By.CSS_SELECTOR,"button.v-btn--primary:nth-of-type(2)")
+    btn_confirmar_generar=(By.CSS_SELECTOR,".v-btn--primary:nth-child(2) > .v-btn__content")
     @staticmethod
     def opcion_dropdown_con_texto(texto):
         return By.XPATH, f"//div[contains(@class,'v-list-item__title') and contains(text(), '{texto}')]"

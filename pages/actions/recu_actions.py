@@ -17,13 +17,49 @@ class RecuActions(BaseActions):
         self.select_dropdown_by_index(2, estrategia)
         self.select_dropdown_by_index(3, modo)
         self.subir_archivo(ruta)
-        self.element_click(RecuPage.btn_confirmar_generar)
+        #self.element_click(RecuPage.btn_confirmar_generar)
+
+        WebDriverWait(self.driver, 10).until(
+            lambda d: d.find_element(*RecuPage.input_archivo).get_attribute("value").strip() != ""
+        )
+        print("[DEBUG] Archivo subido correctamente")
+
+
+        #self.click_confirmar_generar_button()
+
 
         # Aquí deberías ubicar el botón confirmar si existe
         #try:
         #    self.element_click(RecuPage.btn_confirmar_generar)
         #except Exception as e:
         #    print(f"[DEBUG] No se pudo hacer clic en confirmar: {e}")
+
+    def click_confirmar_generar_button(self):
+        wait = WebDriverWait(self.driver, 10)
+
+        # Esperamos a que los botones estén presentes
+        botones = wait.until(EC.presence_of_all_elements_located(RecuPage.btn_confirmar_generar))
+        print(f"[DEBUG] Se encontraron {len(botones)} botones 'Generar'")
+
+        for i in range(len(botones)):
+            try:
+                # Volvemos a capturar los botones para evitar errores stale
+                botones_actualizados = wait.until(EC.presence_of_all_elements_located(RecuPage.btn_confirmar_generar))
+                boton = botones_actualizados[i]
+                texto = boton.text.strip()
+                print(f"[DEBUG] Botón #{i}: '{texto}'")
+
+                if texto.lower() == "generar":
+                    self.driver.execute_script("arguments[0].scrollIntoView({block: 'center'});", boton)
+                    wait.until(EC.element_to_be_clickable(RecuPage.btn_confirmar_generar))
+                    boton.click()
+                    print("✅ Se hizo clic en el botón 'Generar'")
+                    return
+            except Exception as e:
+                print(f"[DEBUG] Error con el botón #{i}: {e}")
+                continue
+
+        raise Exception("No se encontró ningún botón con el texto 'Generar'")
 
     def select_dropdown_by_index(self, index, value_to_select):
         wait = WebDriverWait(self.driver, 10)
